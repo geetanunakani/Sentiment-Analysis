@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review Sentiment Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            color: #6a0dad;
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #6a0dad;
+            font-size: 16px;
+        }
+        button {
+            background-color: #6a0dad;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #4a0080;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            background-color: white;
+        }
+        .positive { color: green; font-size: 28px; }
+        .negative { color: red; font-size: 28px; }
+    </style>
+</head>
+<body>
+    <h1>🎬 Movie Review Sentiment Analyzer</h1>
+    <p style="text-align:center">
+        Built by Nunakani Geeta Pranavi
+    </p>
+
+    <form action="/predict" method="POST">
+        <textarea name="review" 
+                  placeholder="Type your movie review here...">
+            {{ review or '' }}
+        </textarea>
+        <button type="submit">Analyze Sentiment 🔍</button>
+    </form>
+
+    {% if sentiment %}
+    <div class="result">
+        <p>Result:</p>
+        <p class="{{ 'positive' if 'POSITIVE' in sentiment 
+                   else 'negative' }}">
+            {{ sentiment }}
+        </p>
+        <p>Confidence: <strong>{{ confidence }}%</strong></p>
+    </div>
+    {% endif %}
+
+</body>
+</html>
